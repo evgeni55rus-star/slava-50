@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>С юбилеем, Вячеслав! 50 лет</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #0a1128 0%, #1c2541 40%, #3a506b 70%, #5b7c99 100%);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite; }
+  @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+  
+  .moon {
+    position: fixed; top: 40px; right: 60px; width: 80px; height: 80px;
+    background: radial-gradient(circle at 35% 35%, #fff8dc, #f0e68c);
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(255, 248, 220, 0.6), 0 0 80px rgba(255, 248, 220, 0.3);
+    z-index: 0;
+  }
+  
+  .card {
+    position: relative; z-index: 2; max-width: 720px; width: 100%;
+    background: linear-gradient(145deg, #ffffff 0%, #f5f7fa 100%);
+    border-radius: 24px; padding: 45px 35px 35px;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.6), 0 0 0 6px rgba(255,255,255,0.1);
+    text-align: center; overflow: hidden;
+    animation: cardIn 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(60px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  
+  .rails-top { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: repeating-linear-gradient(90deg, #2c3e50 0 20px, #95a5a6 20px 30px); }
+  
+  .jubilee {
+    font-size: 100px; font-weight: 900;
+    background: linear-gradient(180deg, #d4af37, #b8860b, #d4af37);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    line-height: 1; letter-spacing: -4px; text-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    position: relative; display: inline-block; animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(212,175,55,0.5)); } 50% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(212,175,55,0.9)); } }
+  
+  .jubilee span { font-size: 40px; display: block; letter-spacing: 8px; margin-top: 5px; font-weight: 700; background: linear-gradient(90deg, #b8860b, #d4af37, #b8860b); -webkit-background-clip: text; background-clip: text; }
+  
+  h1 { font-size: 32px; color: #1c2541; margin: 20px 0 8px; font-weight: 800; }
+  
+  .subtitle { font-size: 18px; color: #3a506b; margin-bottom: 25px; font-style: italic; position: relative; display: inline-block; padding: 0 20px; }
+  .subtitle::before, .subtitle::after { content: '🚂'; position: absolute; top: 50%; transform: translateY(-50%); font-size: 16px; }
+  .subtitle::before { left: -10px; }
+  .subtitle::after { right: -10px; content: '🚃'; }
+  
+  .train-scene { position: relative; height: 90px; margin: 10px 0 20px; overflow: hidden; border-radius: 12px; background: linear-gradient(180deg, #e8eef5 0%, #d4dce8 100%); }
+  .rail { position: absolute; bottom: 12px; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #7f8c8d, #bdc3c7, #7f8c8d); box-shadow: 0 3px 0 #2c3e50; }
+  .sleepers { position: absolute; bottom: 0; left: 0; right: 0; height: 14px; background: repeating-linear-gradient(90deg, #8b7355 0 8px, transparent 8px 24px); animation: moveSleepers 1s linear infinite; }
+  @keyframes moveSleepers { from { background-position: 0 0; } to { background-position: -24px 0; } }
+  .train { position: absolute; bottom: 16px; font-size: 44px; animation: trainMove 6s linear infinite; filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.3)); }
+  @keyframes trainMove { from { left: -100px; } to { left: 100%; } }
+  .smoke { position: absolute; bottom: 55px; font-size: 20px; opacity: 0; animation: smoke 2s ease-out infinite; }
+  @keyframes smoke { 0% { opacity: 0.9; transform: translate(0,0) scale(0.5); } 100% { opacity: 0; transform: translate(-40px, -30px) scale(1.5); } }
+  
+  .greeting { font-size: 16px; line-height: 1.85; color: #2c3e50; margin: 15px 0 25px; text-align: center; padding: 0 10px; }
+  .poem { font-size: 17px; line-height: 1.9; color: #1c2541; font-weight: 500; font-style: italic; }
+  .poem .line { display: block; margin-bottom: 2px; }
+  .poem .highlight { color: #b8860b; font-weight: 800; font-style: normal; }
+  .poem .green-light { color: #27ae60; font-weight: 800; font-style: normal; }
+  .poem .name { color: #c0392b; font-weight: 800; font-style: normal; }
+  .poem-icons { font-size: 26px; display: block; margin-top: 15px; letter-spacing: 8px; font-style: normal; }
+  
+  .buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+  .btn {
+    padding: 14px 28px; border: none; border-radius: 50px; font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: all 0.3s; font-family: inherit; position: relative; overflow: hidden;
+  }
+  .btn-primary { background: linear-gradient(135deg, #1c2541, #3a506b); color: white; box-shadow: 0 8px 20px rgba(28, 37, 65, 0.4); }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(28, 37, 65, 0.6); }
+  .btn-gold { background: linear-gradient(135deg, #d4af37, #b8860b); color: white; box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5); }
+  .btn-gold:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 28px rgba(212, 175, 55, 0.7); }
+  
+  .secret { margin-top: 20px; padding: 0; max-height: 0; overflow: hidden; transition: all 0.6s ease; opacity: 0; }
+  .secret.show { max-height: 300px; padding: 20px; opacity: 1; background: linear-gradient(135deg, #fffbea, #fff5d1); border-radius: 15px; border: 2px dashed #d4af37; }
+  .secret-text { font-size: 16px; color: #8b6914; font-style: italic; line-height: 1.6; }
+  
+  .confetti-container { position: fixed; inset: 0; pointer-events: none; z-index: 100; overflow: hidden; }
+  .confetti { position: absolute; width: 10px; height: 10px; top: -20px; animation: fall linear forwards; }
+  @keyframes fall { to { transform: translateY(105vh) rotate(720deg); } }
+  
+  .horn-emoji { font-size: 30px; display: inline-block; animation: honk 2s ease-in-out infinite; }
+  @keyframes honk { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+  
+  .driver { font-size: 60px; display: inline-block; animation: wave 1.5s ease-in-out infinite; }
+  @keyframes wave { 0%, 100% { transform: rotate(-5deg) translateY(0); } 50% { transform: rotate(5deg) translateY(-5px); } }
+
+  .audio-hint {
+    position: fixed; bottom: 25px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: linear-gradient(135deg, #d4af37, #b8860b);
+    color: #fff; padding: 12px 24px; border-radius: 50px;
+    font-size: 14px; font-weight: 700;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    z-index: 200; pointer-events: none; opacity: 0;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex; align-items: center; gap: 8px; white-space: nowrap;
+  }
+  .audio-hint.show {
+    transform: translateX(-50%) translateY(0); opacity: 1;
+    animation: hintPulse 1.8s ease-in-out infinite;
+  }
+  @keyframes hintPulse {
+    0%, 100% { box-shadow: 0 10px 30px rgba(212,175,55,0.4); }
+    50% { box-shadow: 0 10px 40px rgba(212,175,55,0.9), 0 0 0 6px rgba(212,175,55,0.15); }
+  }
+  
+  @media (max-width: 500px) {
+    .card { padding: 35px 20px 25px; }
+    .jubilee { font-size: 72px; }
+    .jubilee span { font-size: 26px; letter-spacing: 5px; }
+    h1 { font-size: 24px; }
+    .subtitle { font-size: 15px; }
+    .greeting { font-size: 15px; }
+    .poem { font-size: 15px; line-height: 1.75; }
+    .moon { width: 55px; height: 55px; top: 20px; right: 25px; }
+    .audio-hint { font-size: 12px; padding: 10px 18px; bottom: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="moon"></div>
+
+<div class="card">
+  <div class="rails-top"></div>
+  
+  <div class="jubilee">
+    50
+    <span>ЛЕТ</span>
+  </div>
+  
+  <h1>С юбилеем, Вячеслав!</h1>
+  <div class="subtitle">Машинисту — почёт и уважение</div>
+  
+  <div class="train-scene">
+    <div class="train">🚂🚃🚃</div>
+    <div class="smoke">💨</div>
+    <div class="sleepers"></div>
+    <div class="rail"></div>
+  </div>
+  
+  <div class="greeting">
+    <p style="margin-bottom: 15px;">
+      <span class="driver">👨‍✈️</span>
+      <span class="horn-emoji">📯</span>
+    </p>
+    
+    <div class="poem">
+      <span class="line"><span class="name">Слава</span>, полтинник — серьёзная дата,</span>
+      <span class="line">Но ты машинист — тебе всё нипочём!</span>
+      <span class="line">Желаю, чтоб в жизни не было «стоп-крана»,</span>
+      <span class="line">А только <span class="green-light">«зелёный»</span> горел за плечом.</span>
+      <span class="line">Пусть дома <span class="name">Татьяна</span>, как диспетчер, не строго</span>
+      <span class="line">Даёт разрешенье на отдых с дороги.</span>
+      <span class="line"><span class="highlight">Здоровья, зарплаты, друзей и тепла,</span></span>
+      <span class="line"><span class="highlight">И чтоб не кончалась в пути похвала!</span></span>
+    </div>
+    
+    <span class="poem-icons">🚂🟢🚆</span>
+  </div>
+  
+  <div class="buttons">
+    <button class="btn btn-primary" onclick="honk()">📯 Подать гудок</button>
+    <button class="btn btn-gold" onclick="showSecret()">🎁 Открыть сюрприз</button>
+    <button class="btn btn-primary" id="musicBtn" onclick="toggleMusic()">🎵 Включить песню</button>
+  </div>
+
+  <!-- Песня лежит в той же папке, что и index.html -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает аудио.
+  </audio>
+  
+  <div class="secret" id="secret">
+    <div class="secret-text">
+      🚂 <strong>Особое пожелание машинисту:</strong><br><br>
+      Пусть в жизни всегда горит зелёный свет, 
+      стрелки переводятся только в нужную сторону, 
+      а попутчиками будут верные друзья и любящая семья!<br><br>
+      <em>С юбилеем, Слава! Счастья, здоровья и долгих лет за штурвалом судьбы! 🎉</em>
+    </div>
+  </div>
+</div>
+
+<div class="audio-hint" id="audioHint">
+  <span>🔊</span> Нажмите в любом месте — включится музыка
+</div>
+
+<div class="confetti-container" id="confetti"></div>
+
+<script>
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 100; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.5 + 1;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 70 + '%';
+    s.style.animationDelay = Math.random() * 3 + 's';
+    starsEl.appendChild(s);
+  }
+  
+  function launchConfetti() {
+    const container = document.getElementById('confetti');
+    const colors = ['#d4af37', '#b8860b', '#1c2541', '#3a506b', '#e74c3c', '#f39c12', '#27ae60', '#2980b9'];
+    for (let i = 0; i < 120; i++) {
+      setTimeout(() => {
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random() * 100 + '%';
+        c.style.background = colors[Math.floor(Math.random() * colors.length)];
+        const size = Math.random() * 8 + 6;
+        c.style.width = size + 'px';
+        c.style.height = size + 'px';
+        if (Math.random() > 0.5) c.style.borderRadius = '50%';
+        const duration = Math.random() * 2.5 + 2.5;
+        c.style.animationDuration = duration + 's';
+        c.style.animationDelay = Math.random() * 0.5 + 's';
+        container.appendChild(c);
+        setTimeout(() => c.remove(), (duration + 1) * 1000);
+      }, i * 20);
+    }
+  }
+  
+  function honk() {
+    const train = document.querySelector('.train');
+    train.style.animation = 'none';
+    train.offsetHeight;
+    train.style.animation = 'trainMove 2s linear';
+    
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = audioCtx.currentTime;
+      [440, 554].forEach((freq) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.15, now + 0.1);
+        gain.gain.setValueAtTime(0.15, now + 0.6);
+        gain.gain.linearRampToValueAtTime(0, now + 0.9);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 1);
+      });
+    } catch(e) {}
+    
+    launchConfetti();
+  }
+  
+  function showSecret() {
+    const s = document.getElementById('secret');
+    s.classList.toggle('show');
+    if (s.classList.contains('show')) {
+      launchConfetti();
+    }
+  }
+
+  const music = document.getElementById('bgMusic');
+  const musicBtn = document.getElementById('musicBtn');
+  const hint = document.getElementById('audioHint');
+  let hintShown = false;
+
+  function updateBtn() {
+    if (!music.paused && !music.muted) {
+      musicBtn.textContent = '⏸️ Пауза';
+      musicBtn.style.background = 'linear-gradient(135deg, #b8860b, #8b6914)';
+    } else {
+      musicBtn.textContent = '🎵 Включить песню';
+      musicBtn.style.background = 'linear-gradient(135deg, #1c2541, #3a506b)';
+    }
+  }
+
+  function showHint() {
+    if (!hintShown) { hint.classList.add('show'); hintShown = true; }
+  }
+
+  function hideHint() {
+    hint.classList.remove('show'); hintShown = false;
+  }
+
+  function armUnmuteOnInteraction() {
+    const events = ['pointerdown', 'touchstart', 'mousedown', 'keydown', 'scroll'];
+    const handler = () => {
+      if (!music.muted) { cleanup(); return; }
+      music.muted = false;
+      const p = music.play();
+      if (p && p.then) {
+        p.then(() => { hideHint(); updateBtn(); }).catch(() => {});
+      } else {
+        hideHint(); updateBtn();
+      }
+      cleanup();
+    };
+    function cleanup() { events.forEach(e => window.removeEventListener(e, handler)); }
+    events.forEach(e => window.addEventListener(e, handler, { passive: true }));
+    window.__audioCleanup = cleanup;
+  }
+
+  function initAutoplay() {
+    music.muted = false;
+    const attempt = music.play();
+    
+    if (attempt && attempt.then) {
+      attempt.then(() => {
+        updateBtn();
+        hideHint();
+      }).catch(() => {
+        music.muted = true;
+        const mutedAttempt = music.play();
+        if (mutedAttempt && mutedAttempt.then) {
+          mutedAttempt.then(() => {
+            updateBtn();
+            showHint();
+            armUnmuteOnInteraction();
+          }).catch(() => {
+            showHint();
+            armUnmuteOnInteraction();
+          });
+        } else {
+          showHint();
+          armUnmuteOnInteraction();
+        }
+      });
+    } else {
+      music.muted = true;
+      music.play();
+      showHint();
+      armUnmuteOnInteraction();
+    }
+    updateBtn();
+  }
+
+  function toggleMusic() {
+    if (music.muted) {
+      music.muted = false;
+      music.play().catch(() => {});
+      hideHint();
+      if (window.__audioCleanup) window.__audioCleanup();
+      updateBtn();
+      return;
+    }
+    if (music.paused) {
+      music.play().catch(() => {});
+    } else {
+      music.pause();
+    }
+    updateBtn();
+  }
+
+  music.addEventListener('play', updateBtn);
+  music.addEventListener('pause', updateBtn);
+  music.addEventListener('volumechange', updateBtn);
+  music.addEventListener('ended', updateBtn);
+
+  window.addEventListener('load', () => {
+    setTimeout(launchConfetti, 800);
+    setTimeout(initAutoplay, 400);
+  });
+</script>
+
+</body>
+</html>
